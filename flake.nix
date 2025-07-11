@@ -1,3 +1,4 @@
+# personal fish flake
 {
   description = "Minimal Fish shell flake";
 
