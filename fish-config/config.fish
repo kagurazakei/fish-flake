@@ -1,8 +1,13 @@
 source ~/.config/fish/user_variables.fish
 source ~/.config/fish/abbreviations.fish
 source ~/.config/fish/aliases.fish
-atuin init fish --disable-ctrl-r | source
+set -xg ATUIN_NOBIND "true"
+atuin init fish | source
 any-nix-shell fish --info-right | source
+bind \cr _atuin_search
+bind -M insert \cr _atuin_search
+bind \e\[1\;5A _atuin_search
+bind 'up' _atuin_search
 # theme
 set -g theme_color_scheme terminal-dark
 set -g fish_prompt_pwd_dir_length 1
@@ -37,4 +42,4 @@ set -g fish_pager_color_completion abb2bf
 set -g fish_pager_color_prefix 98c379
 set -g fish_pager_color_description abb2bf
 set -g fish_pager_color_progress abb2bf
-
+set -g fish_plugins autojump vi-mode

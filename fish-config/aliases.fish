@@ -1,14 +1,20 @@
 alias gcl "git clone"
 alias lock "caelestia shell lock lock"
+alias iilock "qs -p ~/.config/caelestia/shell.qml ipc call lock lock"
 alias sv "sudo -E nvim"
-alias fm yazi
-alias ranger yazi
+alias ott "otter-launcher"
+alias fm "yazi"
+alias respect "pay-respects"
+alias ranger "yazi"
+alias krabby "krabby random"
 alias almh "almh.py"
 alias cp "cp -r"
 alias ts "sudo -E timeshift-gtk"
 alias sfm "sudo -E thunar"
 alias mpdmusics "ncmpcpp -c ~/.ncmpcpp/config-art"
 alias cn "cd ~/shizuru"
+alias spp "spotify_player"
+alias z-manga "zathura --config-dir ~/.config"
 #alias ls "eza --long --header --icons --git --group-directories-first "
 alias ls 'g -tb --tb-style=unicode --all --title --total-size --sort=size'
 #alias ls "lsd"
@@ -23,6 +29,7 @@ alias fuck "nh os switch"
 alias fucku "nh os switch --update"
 alias rollfuck "sudo nixos-rebuild switch --rollback --flake .#shizuru"
 alias fuckgc 'nh clean all'
+alias fuckfm "nix-melt"
 alias fuckdit "codium ~/shizuru/"
 alias x "exit"
 alias e "clear"
@@ -55,4 +62,3 @@ alias gr 'git reset'
 alias gt 'git stash'
 alias gtp 'git stash pop'
 alias gu 'git pull'
-

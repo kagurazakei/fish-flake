@@ -1,7 +1,7 @@
 set -l seen '__fish_seen_subcommand_from'
 set -l has_opt '__fish_contains_opt'
 
-set -l commands shell toggle workspace-action scheme screenshot record clipboard emoji-picker wallpaper pip
+set -l commands shell toggle scheme screenshot record clipboard emoji-picker wallpaper pip
 set -l not_seen "not $seen $commands"
 
 # Disable file completions
@@ -13,20 +13,21 @@ complete -c caelestia -s 'h' -l 'help' -d 'Show help'
 # Subcommands
 complete -c caelestia -n $not_seen -a 'shell' -d 'Start the shell or message it'
 complete -c caelestia -n $not_seen -a 'toggle' -d 'Toggle a special workspace'
-complete -c caelestia -n $not_seen -a 'workspace-action' -d 'Exec a dispatcher in the current group'
 complete -c caelestia -n $not_seen -a 'scheme' -d 'Manage the colour scheme'
 complete -c caelestia -n $not_seen -a 'screenshot' -d 'Take a screenshot'
 complete -c caelestia -n $not_seen -a 'record' -d 'Start a screen recording'
 complete -c caelestia -n $not_seen -a 'clipboard' -d 'Open clipboard history'
-complete -c caelestia -n $not_seen -a 'emoji-picker' -d 'Toggle the emoji picker'
+complete -c caelestia -n $not_seen -a 'emoji' -d 'Emoji/glyph utilities'
 complete -c caelestia -n $not_seen -a 'wallpaper' -d 'Manage the wallpaper'
 complete -c caelestia -n $not_seen -a 'pip' -d 'Picture in picture utilities'
 
 # Shell
 set -l commands mpris drawers wallpaper notifs
 set -l not_seen "$seen shell && not $seen $commands"
+complete -c caelestia -n $not_seen -s 'd' -l 'daemon' -d 'Start the shell detached'
 complete -c caelestia -n $not_seen -s 's' -l 'show' -d 'Print all IPC commands'
 complete -c caelestia -n $not_seen -s 'l' -l 'log' -d 'Print the shell log'
+complete -c caelestia -n $not_seen -l 'log-rules' -d 'Log rules to apply'
 complete -c caelestia -n $not_seen -a 'mpris' -d 'Mpris control'
 complete -c caelestia -n $not_seen -a 'drawers' -d 'Toggle drawers'
 complete -c caelestia -n $not_seen -a 'wallpaper' -d 'Wallpaper control (for internal use)'
@@ -73,16 +74,33 @@ complete -c caelestia -n "$seen shell && $seen notifs && not $seen clear" -a 'cl
 set -l commands communication music specialws sysmon todo
 complete -c caelestia -n "$seen toggle && not $seen drawers && not $seen $commands" -a "$commands" -d 'toggle'
 
-# Workspace action
-set -l commands workspace workspacegroup movetoworkspace movetoworkspacegroup
-complete -c caelestia -n "$seen workspace-action && not $seen $commands" -a "$commands" -d 'action'
-
 # Scheme
-complete -c caelestia -n "$seen scheme" -s 'r' -l 'random' -d 'Switch to a random scheme'
-complete -c caelestia -n "$seen scheme" -s 'n' -l 'name' -d 'Set scheme name'
-complete -c caelestia -n "$seen scheme" -s 'f' -l 'flavour' -d 'Set scheme flavour'
-complete -c caelestia -n "$seen scheme" -s 'm' -l 'mode' -d 'Set scheme mode' -a 'light dark'
-complete -c caelestia -n "$seen scheme" -s 'v' -l 'variant' -d 'Set scheme variant' -a 'vibrant tonalspot expressive fidelity fruitsalad rainbow neutral content monochrome'
+set -l commands list get set
+set -l not_seen "$seen scheme && not $seen $commands"
+complete -c caelestia -n $not_seen -a 'list' -d 'List available schemes'
+complete -c caelestia -n $not_seen -a 'get' -d 'Get scheme properties'
+complete -c caelestia -n $not_seen -a 'set' -d 'Set the current scheme'
+
+complete -c caelestia -n "$seen scheme && $seen list" -s 'n' -l 'names' -d 'List scheme names'
+complete -c caelestia -n "$seen scheme && $seen list" -s 'f' -l 'flavours' -d 'List scheme flavours'
+complete -c caelestia -n "$seen scheme && $seen list" -s 'm' -l 'modes' -d 'List scheme modes'
+complete -c caelestia -n "$seen scheme && $seen list" -s 'v' -l 'variants' -d 'List scheme variants'
+
+complete -c caelestia -n "$seen scheme && $seen get" -s 'n' -l 'name' -d 'Get scheme name'
+complete -c caelestia -n "$seen scheme && $seen get" -s 'f' -l 'flavour' -d 'Get scheme flavour'
+complete -c caelestia -n "$seen scheme && $seen get" -s 'm' -l 'mode' -d 'Get scheme mode'
+complete -c caelestia -n "$seen scheme && $seen get" -s 'v' -l 'variant' -d 'Get scheme variant'
+
+complete -c caelestia -n "$seen scheme && $seen set" -l 'notify' -d 'Send a notification on error'
+complete -c caelestia -n "$seen scheme && $seen set" -s 'r' -l 'random' -d 'Switch to a random scheme'
+complete -c caelestia -n "$seen scheme && $seen set" -s 'n' -l 'name' -d 'Set scheme name' -a "$(caelestia scheme list -n)" -r
+complete -c caelestia -n "$seen scheme && $seen set" -s 'f' -l 'flavour' -d 'Set scheme flavour' -a "$(caelestia scheme list -f)" -r
+complete -c caelestia -n "$seen scheme && $seen set" -s 'm' -l 'mode' -d 'Set scheme mode' -a "$(caelestia scheme list -m)" -r
+complete -c caelestia -n "$seen scheme && $seen set" -s 'v' -l 'variant' -d 'Set scheme variant' -a "$(caelestia scheme list -v)" -r
+
+# Screenshot
+complete -c caelestia -n "$seen screenshot" -s 'r' -l 'region' -d 'Capture region'
+complete -c caelestia -n "$seen screenshot" -s 'f' -l 'freeze' -d 'Freeze while selecting region'
 
 # Record
 complete -c caelestia -n "$seen record" -s 'r' -l 'region' -d 'Capture region'
@@ -98,6 +116,10 @@ complete -c caelestia -n "$seen wallpaper" -s 'f' -l 'file' -d 'The file to swit
 complete -c caelestia -n "$seen wallpaper" -s 'n' -l 'no-filter' -d 'Do not filter by size'
 complete -c caelestia -n "$seen wallpaper" -s 't' -l 'threshold' -d 'The threshold to filter by' -r
 complete -c caelestia -n "$seen wallpaper" -s 'N' -l 'no-smart' -d 'Disable smart mode switching'
+
+# Emoji
+complete -c caelestia -n "$seen emoji" -s 'p' -l 'picker' -d 'Open emoji/glyph picker'
+complete -c caelestia -n "$seen emoji" -s 'f' -l 'fetch' -d 'Fetch emoji/glyph data from remote'
 
 # Pip
 complete -c caelestia -n "$seen pip" -s 'd' -l 'daemon' -d 'Start in daemon mode'

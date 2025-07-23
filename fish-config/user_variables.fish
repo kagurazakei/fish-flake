@@ -36,12 +36,11 @@ set -xg NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
 set -xg GTK2_RC_FILES $XDG_CONFIG_HOME/gtk-2.0/gtkrc
 set -xg W3M_DIR $XDG_DATA_HOME/w3m
 set -xg DOTNET_CLI_HOME $XDG_DATA_HOME/dotnet
-
+set -xg MANGA_TUI_DATA_DIR /home/antonio/Documents/mangas
 # Editor
 set -xg EDITOR nvim
-set -xg VISUAL $EDITOR
+set -xg VISUAL codium
 set -xg SUDO_EDITOR $EDITOR
-
 # GPG/LANG
 set -xg GPG_TTY (tty)
 
@@ -63,5 +62,3 @@ if type -q vivid
     set -xg LS_COLORS (vivid generate catppuccin-macchiato)
 end
 set -xg STARSHIP_LOG error
-
-
