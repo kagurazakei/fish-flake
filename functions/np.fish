@@ -1,4 +1,4 @@
-function nu --wraps='npm uninstall' --description 'alias nu=npm uninstall'
+function np --wraps='npm uninstall' --description 'alias nu=npm uninstall'
     if type -f npm &>/dev/null
         npm uninstall $argv
     else

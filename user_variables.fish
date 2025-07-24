@@ -7,6 +7,8 @@ set -xg XDG_BIN_HOME $HOME/.local/bin
 set -xg XDG_SCRIPT_HOME $HOME/.local/script
 
 # Respect XDG Specification
+set -xg NH_FLAKE $HOME/nixos
+set -xg NH_OS_FLAKE $HOME/nixos
 set -xg CONAN_USER_HOME $XDG_CONFIG_HOME
 set -xg GOPATH $XDG_DATA_HOME/go
 set -xg GOMODCACHE $XDG_CACHE_HOME/go/mod
@@ -20,7 +22,7 @@ set -xg DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 set -xg SQLITE_HISTORY $XDG_DATA_HOME/sqlite_history
 set -xg GRADLE_USER_HOME $XDG_DATA_HOME/gradle
 set -xg RIPGREP_CONFIG_PATH $HOME/.config/rg/.ripgreprc
-set -xg STARSHIP_CONFIG $HOME/.config/starship/starship.toml
+set -xg STARSHIP_CONFIG $HOME/.config/starship.toml
 set -xg ANSIBLE_HOME $XDG_CONFIG_HOME/ansible
 set -xg FFMPEG_DATADIR $XDG_CONFIG_HOME/ffmpeg
 set -xg MYSQL_HISTFILE $XDG_DATA_HOME/mysql_history
@@ -43,22 +45,9 @@ set -xg VISUAL codium
 set -xg SUDO_EDITOR $EDITOR
 # GPG/LANG
 set -xg GPG_TTY (tty)
-
-# FZF
-set -xg FZF_DEFAULT_COMMAND fd
-set -xg FZF_DEFAULT_OPTS "--height=90% --layout=reverse --info=inline --border rounded --margin=1 --padding=1 \
---color=bg+:#363a4f,spinner:#f4dbd6,hl:#ed8796 \
---color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
---color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
---bind 'ctrl-u:preview-half-page-up'
---bind 'ctrl-d:preview-half-page-down'
---bind 'ctrl-y:execute-silent(printf {} | cut -f 2- | wl-copy --trim-newline)'"
-set -xg fzf_preview_dir_cmd eza --long --header --icons --all --color=always --group-directories-first --hyperlink
-set -xg fzf_fd_opts --hidden --color=always
-set -xg _ZO_FZF_OPTS $FZF_DEFAULT_OPTS '--preview "{$fzf_preview_dir_cmd} {2}"'
-
 # Other
 if type -q vivid
     set -xg LS_COLORS (vivid generate catppuccin-macchiato)
 end
 set -xg STARSHIP_LOG error
+fish_add_path $XDG_BIN_HOME
