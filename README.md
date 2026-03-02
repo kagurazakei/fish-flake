@@ -1,5 +1,5 @@
 > [!WARNING]
-> This is my repo for installing themes. > [!IMPORTANT]
+> This is the repo for my fish shell dotfile. > [!IMPORTANT]
 
 - Presets
 
