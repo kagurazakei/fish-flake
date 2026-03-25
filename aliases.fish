@@ -36,7 +36,7 @@ alias e clear
 alias ff fastfetch
 alias nf nitch
 alias mf microfetch
-alias rebuild-hana "sudo nixos-rebuild switch --flake .#hana"
+alias rebuild-hana "sudo nixos-rebuild switch --flake .#hana --impure"
 alias rebuild-kagura "sudo nixos-rebuild switch --flake .#kagura"
 alias cd z
 alias zj zellij
