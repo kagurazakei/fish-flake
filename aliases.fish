@@ -20,7 +20,7 @@ alias ls 'g -tb --tb-style=unicode --all --title --total-size --sort=size'
 #alias ls "lsd"
 alias l "ls -a"
 alias lt "ls --tree"
-alias gadd "git add ."
+alias gaa "git add ."
 alias gcommit "git commit -m"
 alias gpush "git push -u origin main"
 alias ... "cd ../.."
@@ -28,6 +28,7 @@ alias .... "cd ../../.."
 alias nh-build "nh os switch --hostname hana"
 alias fucku "nh os switch --update --hostname hana"
 alias rollfuck "sudo nixos-rebuild switch --rollback --flake .#shizuru"
+alias deploy-build "nixos-rebuild switch --flake --sudo"
 alias fuckgc 'nh clean all'
 alias fuckfm nix-melt
 alias fuckdit "codium ~/shizuru/"
